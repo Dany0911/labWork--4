@@ -1,4 +1,4 @@
-import { IonButton, IonContent, IonHeader, IonInput, IonPage, IonTitle, IonToolbar, useIonToast } from '@ionic/react';
+import { IonButton, IonContent, IonHeader, IonInput, IonPage, IonTitle, IonToolbar, useIonRouter, useIonToast } from '@ionic/react';
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { registerUser } from '../firebaseConfig'
@@ -9,7 +9,7 @@ const Register: React.FC = () => {
     const [cpassword, setCPassword] = useState('')
     const [present] = useIonToast()
 
-
+    const navigation = useIonRouter()
 
     async function register() {
 
@@ -26,6 +26,10 @@ const Register: React.FC = () => {
         const res = await registerUser(username, password)
         if (res) {
             present('You have registered successfully!', 2000)
+            setUsername('')
+            setPassword('')
+            setCPassword('')
+            navigation.push('/login', 'root', 'push')
 
         }
 
@@ -39,9 +43,9 @@ const Register: React.FC = () => {
                 </IonToolbar>
             </IonHeader>
             <IonContent className='ion-padding'>
-                <IonInput placeholder="Username?" onIonChange={(e: any) => setUsername(e.target.value)} />
-                <IonInput type="password" placeholder="Password?" onIonChange={(e: any) => setPassword(e.target.value)} />
-                <IonInput type="password" placeholder="Confirm Password?" onIonChange={(e: any) => setCPassword(e.target.value)} />
+                <IonInput placeholder="Username?" value={username} onIonChange={(e: any) => setUsername(e.target.value)} />
+                <IonInput type="password" value={password} placeholder="Password?" onIonChange={(e: any) => setPassword(e.target.value)} />
+                <IonInput type="password" value={cpassword} placeholder="Confirm Password?" onIonChange={(e: any) => setCPassword(e.target.value)} />
                 <IonButton onClick={register}>Register</IonButton>
 
                 <p>Already have an account? <Link to="/login">Login</Link></p>
