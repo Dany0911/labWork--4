@@ -10,6 +10,7 @@ import Extra from './Extra';
 const Menu: React.FC = () => {
   const paths = [
     { name: 'Home', url: '/app/homepage', icon: homeOutline },
+    { name: 'Extra', url: '/app/extra', icon: logoIonic }
   ]
 
   return (
@@ -25,7 +26,7 @@ const Menu: React.FC = () => {
             
             {paths.map((item, index) => (
               <IonMenuToggle key={index} autoHide={false}>
-                <IonRouterLink routerLink="homepage" routerDirection='none'>
+                <IonRouterLink routerLink={item.url} routerDirection='none'>
                   <IonItem>
                     <IonIcon icon={item.icon} slot='start' />
                     {item.name}
@@ -33,16 +34,7 @@ const Menu: React.FC = () => {
                 </IonRouterLink>
               </IonMenuToggle>
             ))}
-            
-            <IonMenuToggle autoHide={false}>
-              <IonRouterLink routerLink="extra">
-                <IonItem>
-                 <IonIcon icon={logoIonic} slot='start' />
-                  Extra
-                </IonItem>
-              </IonRouterLink>
-            </IonMenuToggle>
-            
+                       
             <IonButton routerLink='/login' routerDirection='back' expand='full'>
               <IonIcon icon={logOutOutline} slot='start' />
               Logout
@@ -54,7 +46,7 @@ const Menu: React.FC = () => {
           <Route path='/app/homepage' component={Homepage} />
           <Route path='/app/extra' component={Extra} /> 
           <Route exact path='/app'>
-            {/* <Redirect to='/app/homepage' /> */}
+            <Redirect to='/app/homepage' />
           </Route>
         </IonRouterOutlet>
       </IonSplitPane>
