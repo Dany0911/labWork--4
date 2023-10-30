@@ -19,6 +19,7 @@ const Login: React.FC = () => {
         } else {
             present("You have logged in!", 2000)
             navigation.push('/app', 'root', 'replace')
+            navigation.push('/app/homepage')
 
 
         }
