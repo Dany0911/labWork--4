@@ -18,10 +18,7 @@ const Login: React.FC = () => {
             present("Error logging with your credentials", 2000)
         } else {
             present("You have logged in!", 2000)
-            navigation.push('/app', 'root', 'replace')
-            navigation.push('/app/homepage')
-
-
+            navigation.push('/app/homepage', 'root', 'replace')
         }
 
     }
